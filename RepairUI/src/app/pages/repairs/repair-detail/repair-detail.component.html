@@ -1,18 +1,24 @@
 <div class="container mx-auto p-4">
-  <div class="bg-white rounded-lg shadow-md p-6" *ngIf="repair$ | async as repair">
+  <div
+    class="bg-white rounded-lg shadow-md p-6"
+    *ngIf="repair$ | async as repair"
+  >
     <!-- Header with Status and Actions -->
     <div class="flex justify-between items-center mb-6">
       <div class="space-y-2">
         <h1 class="text-2xl font-bold">Repair Details</h1>
-        <span [ngClass]="getStatusClass(getCurrentStatus(repair))" 
-              class="px-3 py-1 rounded-full text-sm font-medium">
-          {{getStatusText(getCurrentStatus(repair))}}
+        <span
+          [ngClass]="getStatusClass(getCurrentStatus(repair))"
+          class="px-3 py-1 rounded-full text-sm font-medium"
+        >
+          {{ getStatusText(getCurrentStatus(repair)) }}
         </span>
       </div>
       <div class="space-x-4">
-        <button 
+        <button
           [routerLink]="['/repairs', repair.id, 'edit']"
-          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
           Edit Repair
         </button>
       </div>
@@ -24,15 +30,15 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <p class="text-sm text-gray-600">Name</p>
-          <p class="font-medium">{{repair.customer.name}}</p>
+          <p class="font-medium">{{ repair.customer.name }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Phone</p>
-          <p class="font-medium">{{repair.customer.phone}}</p>
+          <p class="font-medium">{{ repair.customer.phone }}</p>
         </div>
         <div class="md:col-span-2">
           <p class="text-sm text-gray-600">Email</p>
-          <p class="font-medium">{{repair.customer.email}}</p>
+          <p class="font-medium">{{ repair.customer.email }}</p>
         </div>
       </div>
     </div>
@@ -43,19 +49,19 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <p class="text-sm text-gray-600">Type</p>
-          <p class="font-medium capitalize">{{repair.product.type}}</p>
+          <p class="font-medium capitalize">{{ repair.product.type }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Brand</p>
-          <p class="font-medium">{{repair.product.brand}}</p>
+          <p class="font-medium">{{ repair.product.brand }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Model</p>
-          <p class="font-medium">{{repair.product.model}}</p>
+          <p class="font-medium">{{ repair.product.model }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Serial Number</p>
-          <p class="font-medium">{{repair.product.serialNumber || '-'}}</p>
+          <p class="font-medium">{{ repair.product.serialNumber || "-" }}</p>
         </div>
       </div>
     </div>
@@ -66,15 +72,19 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <p class="text-sm text-gray-600">Appointment Date</p>
-          <p class="font-medium">{{repair.appointmentDate | date:'mediumDate'}}</p>
+          <p class="font-medium">
+            {{ repair.appointmentDate | date : "mediumDate" }}
+          </p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Appointment Time</p>
-          <p class="font-medium">{{repair.appointmentTime}}</p>
+          <p class="font-medium">{{ repair.appointmentTime }}</p>
         </div>
         <div class="md:col-span-2">
           <p class="text-sm text-gray-600">Estimated Completion</p>
-          <p class="font-medium">{{repair.estimatedCompletionDate | date:'mediumDate'}}</p>
+          <p class="font-medium">
+            {{ repair.estimatedCompletionDate | date : "mediumDate" }}
+          </p>
         </div>
       </div>
     </div>
@@ -82,7 +92,7 @@
     <!-- Description -->
     <div class="mb-6 bg-gray-50 p-4 rounded-lg">
       <h3 class="text-lg font-semibold mb-4">Issue Description</h3>
-      <p class="text-gray-700">{{repair.description}}</p>
+      <p class="text-gray-700">{{ repair.description }}</p>
     </div>
 
     <!-- Device Images -->
@@ -90,12 +100,17 @@
       <h3 class="text-lg font-semibold mb-4">Device Images</h3>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div *ngFor="let image of repair.receivedImages" class="relative">
-          <img [src]="getImageUrl(image)" 
-               class="w-full h-32 object-cover rounded-lg shadow-md"
-               alt="Device image">
+          <img
+            [src]="getImageUrl(image)"
+            class="w-full h-32 object-cover rounded-lg shadow-md"
+            alt="Device image"
+          />
         </div>
       </div>
-      <p *ngIf="!repair.receivedImages?.length" class="text-gray-500 text-center py-4">
+      <p
+        *ngIf="!repair.receivedImages?.length"
+        class="text-gray-500 text-center py-4"
+      >
         No images available
       </p>
     </div>
@@ -104,12 +119,18 @@
     <div class="bg-gray-50 p-4 rounded-lg">
       <h3 class="text-lg font-semibold mb-4">Status History</h3>
       <div class="space-y-4">
-        <div *ngFor="let status of repair.status.slice().reverse()" 
-             class="flex items-start space-x-3 border-l-2 border-blue-500 pl-4">
+        <div
+          *ngFor="let status of repair.statusHistory.slice().reverse()"
+          class="flex items-start space-x-3 border-l-2 border-blue-500 pl-4"
+        >
           <div>
-            <p class="font-medium">{{getStatusText(status.status)}}</p>
-            <p class="text-sm text-gray-500">{{status.timestamp | date:'medium'}}</p>
-            <p *ngIf="status.notes" class="text-sm text-gray-600 mt-1">{{status.notes}}</p>
+            <p class="font-medium">{{ getStatusText(status.status) }}</p>
+            <p class="text-sm text-gray-500">
+              {{ status.timestamp | date : "medium" }}
+            </p>
+            <p *ngIf="status.notes" class="text-sm text-gray-600 mt-1">
+              {{ status.notes }}
+            </p>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export interface Product {
 
 export interface RepairStatus {
   id: string;
-  status: 'received' | 'diagnosing' | 'repairing' | 'completed' | 'delivered';
+  status: "received" | "diagnosing" | "repairing" | "completed" | "delivered";
   timestamp: Date;
   notes?: string;
 }
@@ -25,9 +25,9 @@ export interface Repair {
   customer: Customer;
   product: Product;
   description: string;
-  receivedImages: string[];
+  receivedImages?: string[];
   completedImages?: string[];
-  status: RepairStatus[];
+  statusHistory: RepairStatus[];
   createdAt: Date;
   updatedAt: Date;
   estimatedCompletionDate: Date;

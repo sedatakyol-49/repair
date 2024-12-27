@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Vmety+ALtgAWIsoVlWJlTFtONibY5ToXD7KlJSqgE74=",
+  "Source": "Repair.WebAPI",
+  "BasePath": "_content/Repair.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
