@@ -1,10 +1,3 @@
-export interface Customer {
-  id?: string;
-  name: string;
-  email: string;
-  phone: string;
-}
-
 export interface Product {
   id?: string;
   type: string;
@@ -22,15 +15,17 @@ export interface RepairStatus {
 
 export interface Repair {
   id?: string;
-  customer: Customer;
-  product: Product;
   description: string;
   receivedImages?: string[];
   completedImages?: string[];
-  statusHistory: RepairStatus[];
   createdAt: Date;
   updatedAt: Date;
   estimatedCompletionDate: Date;
   appointmentDate: Date;
   appointmentTime: string;
+  name: string;
+  email: string;
+  phone: string;
+  product: Product;
+  statusHistory: RepairStatus[];
 }

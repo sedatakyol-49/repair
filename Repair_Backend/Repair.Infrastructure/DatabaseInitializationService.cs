@@ -26,13 +26,9 @@ public class DatabaseInitializationService
             await _context.Database.EnsureCreatedAsync();
 
             // Check if database is empty
-            if (!await _context.Customers.AnyAsync())
+            if (!await _context.Repairs.AnyAsync())
             {
                 _logger.LogInformation("Database is empty. Seeding initial data...");
-
-                // Add customers
-                await _context.Customers.AddRangeAsync(SeedData.Customers);
-                await _context.SaveChangesAsync();
 
                 // Add repairs with status history
                 await _context.Repairs.AddRangeAsync(SeedData.Repairs);

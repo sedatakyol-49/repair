@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9/B6v4HVzzciwWW4xppV2D3EOQVHFYsX2plLzpZCXKC4rswPbGRJlsb0o9OhYy0G35JxiR854T9Pen89XPdJMA==",
+  "dgSpecHash": "DvLD+ipmUp26ZVNmmQ8WHLWCRYVMUwjppwMgMS0oz9Fc0aKRFS4xDpmRdWsdpPrc30Rg4KglcKMXNJJtbTcd/A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sedat.akyol\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\sedat.akyol\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

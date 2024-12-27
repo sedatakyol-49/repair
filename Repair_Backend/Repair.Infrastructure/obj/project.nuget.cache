@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+OQLgiTf91LYdYGPHINXe4GN0a7J6KIxzRCaIXBx732GAoce1nhmI3pYg2nc0ud6JF+ZULjBqmwPRlm3OAl2zQ==",
+  "dgSpecHash": "70Wqn2ecQtDKDkGpjslfwUfintwL3va1UsXDfy6qHg4ViKVQnzEbIUSiwx/blAGf2UJGw1POyEo6Yo9Db/n2NQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sedat.akyol\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\sedat.akyol\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

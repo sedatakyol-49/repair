@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/gO5IIQeZMAOYNf/zi1R6yBTW2GL8iDe/DRtLn3hA15FeeKlT+INuT6CgT44vSeFkRgA9Mnz0wgXFIPdcQlIOA==",
+  "dgSpecHash": "7gQH27KCY7djr8F+/JLrXynHnMkHLjIJD4OI0hpVIHRenHzM/LCHSk2plyHn1gpTU4U6CcMUd9pkO2X9b+8ZpA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sedat.akyol\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\sedat.akyol\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

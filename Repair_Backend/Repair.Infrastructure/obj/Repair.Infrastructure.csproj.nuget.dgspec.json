@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {}
+    "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
+    "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
         "projectName": "Repair.Infrastructure",
-        "projectPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\sedat.akyol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sedat.akyol\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -23,12 +23,10 @@ export class RepairFilterPipe implements PipeTransform {
 
       const matchesName =
         !filters.customerName ||
-        repair.customer.name
-          .toLowerCase()
-          .includes(filters.customerName.toLowerCase());
+        repair.name.toLowerCase().includes(filters.customerName.toLowerCase());
 
       const matchesPhone =
-        !filters.phone || repair.customer.phone.includes(filters.phone);
+        !filters.phone || repair.phone.includes(filters.phone);
 
       const matchesType =
         !filters.productType || repair.product.type === filters.productType;

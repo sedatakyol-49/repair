@@ -19,7 +19,7 @@ public class AuthService : IAuthService
     {
         try
         {
-            return await _context.Customers.AnyAsync();
+            return await _context.Repairs.AnyAsync();
         }
         catch (Exception ex)
         {

@@ -1,8 +1,10 @@
 <div class="container mx-auto p-4">
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold">Repair List</h2>
-    <a routerLink="/repairs/new" 
-       class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+    <a
+      routerLink="/repairs/new"
+      class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+    >
       New Repair
     </a>
   </div>
@@ -13,12 +15,12 @@
       [(ngModel)]="filters.customerName"
       placeholder="Customer Name"
       class="p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-    >
+    />
     <input
       [(ngModel)]="filters.phone"
       placeholder="Phone"
       class="p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
-    >
+    />
     <select
       [(ngModel)]="filters.productType"
       class="p-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -43,37 +45,43 @@
 
   <!-- Repair List -->
   <div class="space-y-4">
-    <div *ngFor="let repair of repairs$ | async | repairFilter:filters" 
-         [routerLink]="['/repairs', repair.id]"
-         class="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer">
+    <div
+      *ngFor="let repair of repairs$ | async | repairFilter : filters"
+      [routerLink]="['/repairs', repair.id]"
+      class="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+    >
       <div class="flex justify-between items-start">
         <div>
-          <h3 class="font-semibold">{{repair.customer.name}}</h3>
-          <p class="text-sm text-gray-600">{{repair.customer.phone}}</p>
-          <p class="text-sm">{{repair.product.brand}} {{repair.product.model}}</p>
+          <h3 class="font-semibold">{{ repair.name }}</h3>
+          <p class="text-sm text-gray-600">{{ repair.phone }}</p>
+          <p class="text-sm">
+            {{ repair.product.brand }} {{ repair.product.model }}
+          </p>
         </div>
         <div class="text-right space-y-2">
           <!-- Status Badge -->
           <span [ngClass]="getStatusClass(getCurrentStatus(repair))">
-            {{getStatusText(getCurrentStatus(repair))}}
+            {{ getStatusText(getCurrentStatus(repair)) }}
           </span>
-          
+
           <!-- Quick Status Update -->
-          <select 
+          <select
             [value]="getCurrentStatus(repair)"
             (change)="updateStatus($event, repair.id)"
             (click)="$event.stopPropagation()"
             class="block w-full px-3 py-1 mt-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500"
           >
-            <option *ngFor="let option of statusOptions" 
-                    [value]="option.value"
-                    [selected]="getCurrentStatus(repair) === option.value">
-              {{option.label}}
+            <option
+              *ngFor="let option of statusOptions"
+              [value]="option.value"
+              [selected]="getCurrentStatus(repair) === option.value"
+            >
+              {{ option.label }}
             </option>
           </select>
-          
+
           <p class="text-sm text-gray-500">
-            {{repair.createdAt | date:'MMM d, y'}}
+            {{ repair.createdAt | date : "MMM d, y" }}
           </p>
         </div>
       </div>

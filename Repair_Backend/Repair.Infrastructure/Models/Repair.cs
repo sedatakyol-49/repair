@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace Repair.Infrastructure.Models;
 
@@ -23,9 +22,19 @@ public class RepairModel
     [MaxLength(10)]
     public string AppointmentTime { get; set; } = string.Empty;
 
-    public Guid CustomerId { get; set; }
+    [Required]
+    [MaxLength(100)]
+    public string Name { get; set; } = string.Empty;
 
-    public Customer Customer { get; set; } = null!;
+    [MaxLength(100)]
+    public string Surname { get; set; } = string.Empty;
+
+    [EmailAddress]
+    [MaxLength(100)]
+    public string Email { get; set; } = string.Empty;
+
+    [MaxLength(20)]
+    public string Phone { get; set; } = string.Empty;
 
     public Product Product { get; set; } = null!;
 

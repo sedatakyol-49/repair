@@ -49,7 +49,6 @@ public class RepairService : IRepairService
     public async Task<List<RepairDTO>> GetRepairsWithDetailsAsync()
     {
         List<RepairModel>repairModel= await  _context.Repairs
-            .Include(r => r.Customer)
             .Include(r => r.Product)
             .Include(r => r.StatusHistory)
             .OrderByDescending(r => r.CreatedAt)
@@ -61,7 +60,6 @@ public class RepairService : IRepairService
     public async Task<RepairDTO?> GetRepairWithDetailsAsync(Guid id)
     {
         var repairModel= await _context.Repairs
-            .Include(r => r.Customer)
             .Include(r => r.Product)
             .Include(r => r.StatusHistory)
             .FirstOrDefaultAsync(r => r.Id == id);

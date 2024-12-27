@@ -2,7 +2,7 @@
 
 namespace Repair.Infrastructure.DTOs;
 
-public class RepairDTO {
+public class RequestRepairDTO {
     public Guid Id { get; set; }
     public string Description { get; set; } = string.Empty;
     public List<string>? ReceivedImages { get; set; }
@@ -14,8 +14,8 @@ public class RepairDTO {
     public string? AppointmentTime { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Surname { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string Phone { get; set; } = string.Empty;
+    public string? Email { get; set; }
+    public string? Phone { get; set; }
     public Product Product { get; set; } = new Product();
     public List<RepairStatus>? StatusHistory { get; set; }
 

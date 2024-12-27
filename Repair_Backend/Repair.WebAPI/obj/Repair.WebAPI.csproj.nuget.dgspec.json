@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj": {}
+    "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj": {
+    "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj",
         "projectName": "Repair.BusinessLogic",
-        "projectPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj",
+        "projectPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj",
         "packagesPath": "C:\\Users\\sedat.akyol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.BusinessLogic\\obj\\",
+        "outputPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sedat.akyol\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj"
+              "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj"
               }
             }
           }
@@ -64,14 +64,14 @@
         }
       }
     },
-    "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
+    "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
         "projectName": "Repair.Infrastructure",
-        "projectPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\sedat.akyol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sedat.akyol\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -166,14 +166,14 @@
         }
       }
     },
-    "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj": {
+    "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj",
         "projectName": "Repair.WebAPI",
-        "projectPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj",
+        "projectPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.WebAPI\\Repair.WebAPI.csproj",
         "packagesPath": "C:\\Users\\sedat.akyol\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\sedat.akyol\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -191,11 +191,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj": {
-                "projectPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj"
+              "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj": {
+                "projectPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.BusinessLogic\\Repair.BusinessLogic.csproj"
               },
-              "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\sedat.akyol\\Documents\\GitHub\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj"
+              "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\sedat.akyol\\Desktop\\example-demos\\Repair\\repair\\Repair_Backend\\Repair.Infrastructure\\Repair.Infrastructure.csproj"
               }
             }
           }
