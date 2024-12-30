@@ -1,7 +1,14 @@
 import { Repair } from "../models/repair.model";
 
 export const getCurrentStatus = (repair: Repair): string => {
-  return repair.statusHistory[repair.statusHistory.length - 1].status;
+  if (!repair?.statusHistory?.length) {
+    return "received";
+  }
+  // Find the status with the latest timestamp
+  const latestStatus = repair.statusHistory.reduce((acc, curr) => {
+    return curr.timestamp > acc.timestamp ? curr : acc;
+  });
+  return latestStatus.status;
 };
 
 export const getStatusText = (status: string): string => {

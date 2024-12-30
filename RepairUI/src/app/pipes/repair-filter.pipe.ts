@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
-import { Repair } from "../../../models/repair.model";
+import { Repair } from "../models/repair.model";
 
 interface Filters {
   customerName: string;
@@ -19,7 +19,7 @@ export class RepairFilterPipe implements PipeTransform {
 
     return repairs.filter((repair) => {
       const currentStatus =
-        repair.statusHistory[repair.statusHistory.length - 1].status;
+        repair.statusHistory?.[repair.statusHistory.length - 1]?.status; // Use optional chaining
 
       const matchesName =
         !filters.customerName ||
@@ -29,7 +29,7 @@ export class RepairFilterPipe implements PipeTransform {
         !filters.phone || repair.phone.includes(filters.phone);
 
       const matchesType =
-        !filters.productType || repair.product.type === filters.productType;
+        !filters.productType || repair.type === filters.productType;
 
       const matchesStatus = !filters.status || currentStatus === filters.status;
 

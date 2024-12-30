@@ -1,4 +1,5 @@
-﻿using Repair.Infrastructure.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using Repair.Infrastructure.Models;
 
 namespace Repair.Infrastructure.DTOs;
 
@@ -16,7 +17,10 @@ public class RepairDTO {
     public string Surname { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Phone { get; set; } = string.Empty;
-    public Product Product { get; set; } = new Product();
+    public string Type { get; set; } = string.Empty;
+    public string Brand { get; set; } = string.Empty;
+    public string Model { get; set; } = string.Empty;
+    public string? SerialNumber { get; set; }
     public List<RepairStatus>? StatusHistory { get; set; }
 
 }

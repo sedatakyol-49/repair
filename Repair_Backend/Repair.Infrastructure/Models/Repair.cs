@@ -36,7 +36,20 @@ public class RepairModel
     [MaxLength(20)]
     public string Phone { get; set; } = string.Empty;
 
-    public Product Product { get; set; } = null!;
+    [Required]
+    [MaxLength(50)]
+    public string Type { get; set; } = string.Empty;
+
+    [Required]
+    [MaxLength(50)]
+    public string Brand { get; set; } = string.Empty;
+
+    [Required]
+    [MaxLength(100)]
+    public string Model { get; set; } = string.Empty;
+
+    [MaxLength(50)]
+    public string? SerialNumber { get; set; }
 
     public ICollection<RepairStatus> StatusHistory { get; set; } = new List<RepairStatus>();
 }

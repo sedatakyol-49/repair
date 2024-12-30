@@ -55,6 +55,8 @@ export class RepairCreateComponent {
         receivedImages: this.imagePreviewUrls,
         createdAt: new Date(),
         updatedAt: new Date(),
+        completedImages: [],
+        statusHistory: [],
       };
 
       try {

@@ -11,7 +11,6 @@ public class RepairDBContext : DbContext
     {
     }
 
-    public DbSet<Product> Products { get; set; } = null!;
     public DbSet<RepairModel> Repairs { get; set; } = null!;
     public DbSet<RepairStatus> RepairStatuses { get; set; } = null!;
 

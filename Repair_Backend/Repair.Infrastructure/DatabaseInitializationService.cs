@@ -34,10 +34,6 @@ public class DatabaseInitializationService
                 await _context.Repairs.AddRangeAsync(SeedData.Repairs);
                 await _context.SaveChangesAsync();
 
-                // Add products
-                await _context.Products.AddRangeAsync(SeedData.Products);
-                await _context.SaveChangesAsync();
-
                 _logger.LogInformation("Database seeding completed successfully.");
             }
             else

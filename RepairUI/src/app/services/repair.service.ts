@@ -17,7 +17,7 @@ export class RepairService {
   private loadRepairs() {
     this.api
       .get<Repair[]>("repairs")
-      .pipe(tap((res) => console.log("repairs:", res)))
+      .pipe()
       .subscribe((repairs) => this.repairs.next(repairs));
   }
 
@@ -31,6 +31,7 @@ export class RepairService {
   }
 
   updateRepair(id: string, repair: Partial<Repair>): Observable<void> {
+    console.log("repair:", repair);
     return this.api.put<void>(`repairs/${id}`, repair).pipe(
       tap(() => {
         const currentRepairs = this.repairs.getValue();
@@ -54,13 +55,14 @@ export class RepairService {
           if (repair.id === id) {
             return {
               ...repair,
-              status: [
+              statusHistory: [
                 ...repair.statusHistory,
                 {
                   id: crypto.randomUUID(),
                   status: status as any,
-                  timestamp: new Date(),
+                  timestamp: new Date().toISOString(),
                   notes,
+                  repairId: id,
                 },
               ],
             };

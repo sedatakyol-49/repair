@@ -34,7 +34,7 @@ public class NotificationService : INotificationService
         var emailBody = $@"
 Dear {repair.Name},
 
-Your repair order for {repair.Product.Brand} {repair.Product.Model} has been updated.
+Your repair order for {repair.Brand} {repair.Model} has been updated.
 Current Status: {statusText}
 
 Track your repair at: [Repair Tracking URL]
@@ -42,7 +42,7 @@ Track your repair at: [Repair Tracking URL]
 Best regards,
 Repair Service Team";
 
-        var smsMessage = $"Repair Update: Your {repair.Product.Brand} {repair.Product.Model} repair status is now \"{statusText}\". Track at: [URL]";
+        var smsMessage = $"Repair Update: Your {repair.Brand} {repair.Model} repair status is now \"{statusText}\". Track at: [URL]";
 
         await SendEmailAsync(repair.Email, emailSubject, emailBody);
         await SendSMSAsync(repair.Phone, smsMessage);

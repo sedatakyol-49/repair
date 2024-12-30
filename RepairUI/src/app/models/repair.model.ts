@@ -1,16 +1,9 @@
-export interface Product {
-  id?: string;
-  type: string;
-  brand: string;
-  model: string;
-  serialNumber?: string;
-}
-
 export interface RepairStatus {
   id: string;
-  status: "received" | "diagnosing" | "repairing" | "completed" | "delivered";
-  timestamp: Date;
+  status: RepairStatusType;
+  timestamp: string;
   notes?: string;
+  repairId: string;
 }
 
 export interface Repair {
@@ -24,8 +17,24 @@ export interface Repair {
   appointmentDate: Date;
   appointmentTime: string;
   name: string;
+  surname: string;
   email: string;
   phone: string;
-  product: Product;
+  type: string;
+  brand: string;
+  model?: string;
+  serialNumber?: string;
   statusHistory: RepairStatus[];
+}
+
+export type RepairStatusType =
+  | "received"
+  | "diagnosing"
+  | "repairing"
+  | "completed"
+  | "delivered";
+
+export interface UpdateStatusRequest {
+  status: RepairStatusType;
+  notes?: string;
 }

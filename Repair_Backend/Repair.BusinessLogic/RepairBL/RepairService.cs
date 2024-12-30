@@ -17,11 +17,20 @@ public class RepairService : IRepairService
         _mapper = mapper;
     }
 
-    public async Task<RepairDTO> AddAsync(RepairDTO entity)
+    public async Task<RepairDTO> AddAsync(RepairDTO dto)
     {
+        var entity = _mapper.Map<RepairModel>(dto);
+
+        if (entity.StatusHistory == null)
+        {
+            entity.StatusHistory = new List<RepairStatus>();
+        }
+
         await _context.AddAsync(entity);
         await _context.SaveChangesAsync();
-        return entity;
+
+        dto.Id = entity.Id;
+        return dto;
     }
 
     public async Task DeleteAsync(Guid id)
@@ -34,8 +43,36 @@ public class RepairService : IRepairService
         }
     }
 
-    public async Task UpdateAsync(RepairDTO entity)
+    public async Task UpdateAsync(RepairDTO dto)
     {
+        var entity = await _context.Repairs
+             .Include(r => r.StatusHistory)
+             .FirstOrDefaultAsync(r => r.Id == dto.Id);
+
+        if (entity == null)
+        {
+            throw new KeyNotFoundException("Repair not found.");
+        }
+
+        _mapper.Map(dto, entity);
+
+        if (dto.StatusHistory != null)
+        {
+            entity.StatusHistory.Clear();
+
+            foreach (var statusDto in dto.StatusHistory)
+            {
+                entity.StatusHistory.Add(new RepairStatus
+                {
+                    Id = statusDto.Id != Guid.Empty ? statusDto.Id : Guid.NewGuid(), 
+                    Status = statusDto.Status,
+                    Timestamp = statusDto.Timestamp,
+                    Notes = statusDto.Notes,
+                    RepairId = entity.Id 
+                });
+            }
+        }
+
         _context.Update(entity);
         await _context.SaveChangesAsync();
     }
@@ -49,7 +86,6 @@ public class RepairService : IRepairService
     public async Task<List<RepairDTO>> GetRepairsWithDetailsAsync()
     {
         List<RepairModel>repairModel= await  _context.Repairs
-            .Include(r => r.Product)
             .Include(r => r.StatusHistory)
             .OrderByDescending(r => r.CreatedAt)
             .ToListAsync();
@@ -60,19 +96,22 @@ public class RepairService : IRepairService
     public async Task<RepairDTO?> GetRepairWithDetailsAsync(Guid id)
     {
         var repairModel= await _context.Repairs
-            .Include(r => r.Product)
             .Include(r => r.StatusHistory)
             .FirstOrDefaultAsync(r => r.Id == id);
 
         return _mapper?.Map<RepairDTO?>(repairModel);
     }
 
- 
+
 
     public async Task UpdateRepairStatusAsync(Guid repairId, string status, string? notes)
     {
-        var repair = await GetByIdAsync(repairId);
-        if (repair == null) return;
+        var repair = await _context.Repairs
+            .Include(r => r.StatusHistory)
+            .FirstOrDefaultAsync(r => r.Id == repairId);
+
+        if (repair == null)
+            return;
 
         var newStatus = new RepairStatus
         {
@@ -82,9 +121,19 @@ public class RepairService : IRepairService
             RepairId = repairId
         };
 
-        repair.StatusHistory?.Add(newStatus);
+        repair.StatusHistory ??= new List<RepairStatus>();
+        repair.StatusHistory.Add(newStatus);
         repair.UpdatedAt = DateTime.UtcNow;
 
-        await _context.SaveChangesAsync();
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error while saving changes: {ex.Message}");
+            throw;
+        }
     }
+
 }

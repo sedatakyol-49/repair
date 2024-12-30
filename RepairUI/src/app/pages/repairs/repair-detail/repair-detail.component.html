@@ -30,15 +30,19 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <p class="text-sm text-gray-600">Name</p>
-          <p class="font-medium">{{ repair.customer.name }}</p>
+          <p class="font-medium">{{ repair.name }}</p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-600">Surname</p>
+          <p class="font-medium">{{ repair.surname }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Phone</p>
-          <p class="font-medium">{{ repair.customer.phone }}</p>
+          <p class="font-medium">{{ repair.phone }}</p>
         </div>
-        <div class="md:col-span-2">
+        <div>
           <p class="text-sm text-gray-600">Email</p>
-          <p class="font-medium">{{ repair.customer.email }}</p>
+          <p class="font-medium">{{ repair.email }}</p>
         </div>
       </div>
     </div>
@@ -49,19 +53,19 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <p class="text-sm text-gray-600">Type</p>
-          <p class="font-medium capitalize">{{ repair.product.type }}</p>
+          <p class="font-medium capitalize">{{ repair.type }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Brand</p>
-          <p class="font-medium">{{ repair.product.brand }}</p>
+          <p class="font-medium">{{ repair.brand }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Model</p>
-          <p class="font-medium">{{ repair.product.model }}</p>
+          <p class="font-medium">{{ repair.model }}</p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Serial Number</p>
-          <p class="font-medium">{{ repair.product.serialNumber || "-" }}</p>
+          <p class="font-medium">{{ repair.serialNumber || "-" }}</p>
         </div>
       </div>
     </div>
@@ -101,7 +105,7 @@
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div *ngFor="let image of repair.receivedImages" class="relative">
           <img
-            [src]="getImageUrl(image)"
+            [src]="'data:image/jpeg;base64,' + image"
             class="w-full h-32 object-cover rounded-lg shadow-md"
             alt="Device image"
           />

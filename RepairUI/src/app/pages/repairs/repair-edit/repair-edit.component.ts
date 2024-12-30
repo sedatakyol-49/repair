@@ -1,6 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RepairService } from "../../../services/repair.service";
 import { map } from "rxjs/operators";
@@ -16,11 +21,12 @@ import {
   getStatusClass,
 } from "../../../utils/repair-status.utils";
 import { firstValueFrom } from "rxjs";
+import { RepairStatusType } from "../../../models/repair.model";
 
 @Component({
   selector: "app-repair-edit",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: "./repair-edit.component.html",
   styleUrls: ["./repair-edit.component.css"],
 })
@@ -55,8 +61,15 @@ export class RepairEditComponent implements OnInit {
     this.repair$.subscribe((repair) => {
       if (repair) {
         this.repairForm.patchValue({
-          product: repair.product,
           description: repair.description,
+          name: repair.name,
+          surname: repair.surname,
+          email: repair.email,
+          phone: repair.phone,
+          type: repair.type,
+          brand: repair.brand,
+          model: repair.model,
+          serialNumber: repair.serialNumber,
           appointmentDate: this.formatDate(repair.appointmentDate),
           appointmentTime: repair.appointmentTime,
           estimatedCompletionDate: this.formatDate(
@@ -95,14 +108,11 @@ export class RepairEditComponent implements OnInit {
     this.imagePreviewUrls = result.previewUrls;
   }
 
-  updateStatus(event: Event, repairId: string | undefined) {
+  updateStatus(newStatus: RepairStatusType, repairId: string | undefined) {
     if (!repairId) return;
-    const select = event.target as HTMLSelectElement;
-    this.repairService.updateRepairStatus(
-      repairId,
-      select.value,
-      "Status updated from edit view"
-    );
+    this.repairService
+      .updateRepairStatus(repairId, newStatus, "Status updated from edit view")
+      .subscribe();
   }
 
   cancel() {
@@ -117,10 +127,15 @@ export class RepairEditComponent implements OnInit {
         const formData = this.repairForm.value;
         const repair = {
           ...formData,
+          id: this.repairService.getRepair(id)?.id,
+          createdAt: this.repairService.getRepair(id)?.createdAt,
+          updatedAt: new Date(),
           receivedImages:
             this.imagePreviewUrls.length > 0
               ? this.imagePreviewUrls
               : this.repairService.getRepair(id)?.receivedImages || [],
+          completedImages: this.receivedImages,
+          statusHistory: this.repairService.getRepair(id)?.statusHistory || [],
         };
 
         try {
