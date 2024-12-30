@@ -17,7 +17,7 @@ public class RepairService : IRepairService
         _mapper = mapper;
     }
 
-    public async Task<RepairDTO> AddAsync(RepairDTO dto)
+    public async Task<RepairModel> AddAsync(CreateRepairDto dto)
     {
         var entity = _mapper.Map<RepairModel>(dto);
 
@@ -28,9 +28,7 @@ public class RepairService : IRepairService
 
         await _context.AddAsync(entity);
         await _context.SaveChangesAsync();
-
-        dto.Id = entity.Id;
-        return dto;
+        return entity;
     }
 
     public async Task DeleteAsync(Guid id)
@@ -43,11 +41,11 @@ public class RepairService : IRepairService
         }
     }
 
-    public async Task UpdateAsync(RepairDTO dto)
+    public async Task UpdateAsync(UpdateRepairDto dto)
     {
         var entity = await _context.Repairs
-             .Include(r => r.StatusHistory)
-             .FirstOrDefaultAsync(r => r.Id == dto.Id);
+            .Include(r => r.StatusHistory)
+            .FirstOrDefaultAsync(r => r.Id == dto.Id);
 
         if (entity == null)
         {
@@ -56,50 +54,34 @@ public class RepairService : IRepairService
 
         _mapper.Map(dto, entity);
 
-        if (dto.StatusHistory != null)
-        {
-            entity.StatusHistory.Clear();
-
-            foreach (var statusDto in dto.StatusHistory)
-            {
-                entity.StatusHistory.Add(new RepairStatus
-                {
-                    Id = statusDto.Id != Guid.Empty ? statusDto.Id : Guid.NewGuid(), 
-                    Status = statusDto.Status,
-                    Timestamp = statusDto.Timestamp,
-                    Notes = statusDto.Notes,
-                    RepairId = entity.Id 
-                });
-            }
-        }
-
         _context.Update(entity);
         await _context.SaveChangesAsync();
     }
 
-    public async Task<RepairDTO> GetByIdAsync(Guid id)
+
+    public async Task<RepairDto> GetByIdAsync(Guid id)
     {
         var repairModel= await _context.Repairs.FindAsync(id);
-        return _mapper.Map<RepairDTO>(repairModel);
+        return _mapper.Map<RepairDto>(repairModel);
     }
 
-    public async Task<List<RepairDTO>> GetRepairsWithDetailsAsync()
+    public async Task<List<RepairDto>> GetRepairsWithDetailsAsync()
     {
         List<RepairModel>repairModel= await  _context.Repairs
             .Include(r => r.StatusHistory)
             .OrderByDescending(r => r.CreatedAt)
             .ToListAsync();
 
-        return _mapper.Map<List<RepairDTO>>(repairModel);
+        return _mapper.Map<List<RepairDto>>(repairModel);
     }
 
-    public async Task<RepairDTO?> GetRepairWithDetailsAsync(Guid id)
+    public async Task<RepairDto?> GetRepairWithDetailsAsync(Guid id)
     {
         var repairModel= await _context.Repairs
             .Include(r => r.StatusHistory)
             .FirstOrDefaultAsync(r => r.Id == id);
 
-        return _mapper?.Map<RepairDTO?>(repairModel);
+        return _mapper?.Map<RepairDto?>(repairModel);
     }
 
 

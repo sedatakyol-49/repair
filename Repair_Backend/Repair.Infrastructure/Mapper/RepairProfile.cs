@@ -8,18 +8,21 @@ namespace Repair.Infrastructure.Mapper
     {
         public RepairProfile()
         {
-            // Entity -> DTO
-            CreateMap<RepairModel, RepairDTO>();
+            //GetRepair
+            CreateMap<RepairModel, RepairDto>();
 
-            CreateMap<RepairDTO, RepairModel>()
+            //Update Repair
+            CreateMap<UpdateRepairDto, RepairModel>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
             .ForMember(dest => dest.StatusHistory, opt => opt.Ignore());
 
-            CreateMap<RepairDTO, RepairModel>()
+            //Create repair
+            CreateMap<CreateRepairDto, RepairModel>()
                         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid())) 
                         .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow))
                         .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow)) 
-                        .ForMember(dest => dest.StatusHistory, opt => opt.MapFrom(src => src.StatusHistory ?? new List<RepairStatus>())); 
+                        .ForMember(dest => dest.StatusHistory, opt => opt.MapFrom(src =>new List<RepairStatus>())); 
 
         }
     }

@@ -101,11 +101,11 @@
 
     <!-- Device Images -->
     <div class="mb-6 bg-gray-50 p-4 rounded-lg">
-      <h3 class="text-lg font-semibold mb-4">Device Images</h3>
+      <h3 class="text-lg font-semibold mb-4">Initial Device Images</h3>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div *ngFor="let image of repair.receivedImages" class="relative">
           <img
-            [src]="'data:image/jpeg;base64,' + image"
+            [src]="image"
             class="w-full h-32 object-cover rounded-lg shadow-md"
             alt="Device image"
           />
@@ -113,6 +113,25 @@
       </div>
       <p
         *ngIf="!repair.receivedImages?.length"
+        class="text-gray-500 text-center py-4"
+      >
+        No images available
+      </p>
+    </div>
+
+    <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+      <h3 class="text-lg font-semibold mb-4">Completed Device Images</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div *ngFor="let image of repair.completedImages" class="relative">
+          <img
+            [src]="image"
+            class="w-full h-32 object-cover rounded-lg shadow-md"
+            alt="Device image"
+          />
+        </div>
+      </div>
+      <p
+        *ngIf="!repair.completedImages?.length"
         class="text-gray-500 text-center py-4"
       >
         No images available

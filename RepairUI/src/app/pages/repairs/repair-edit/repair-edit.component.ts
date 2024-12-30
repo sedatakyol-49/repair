@@ -13,6 +13,7 @@ import {
   handleImageUpload,
   removeImage,
   getImageUrl,
+  ImageSection,
 } from "../../../utils/image.utils";
 import { createRepairForm } from "../repair-create/repair-create.form";
 import {
@@ -22,18 +23,42 @@ import {
 } from "../../../utils/repair-status.utils";
 import { firstValueFrom } from "rxjs";
 import { RepairStatusType } from "../../../models/repair.model";
+import { ImageSectionComponent } from "../../../components/image-section/image-section.component";
 
 @Component({
   selector: "app-repair-edit",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ImageSectionComponent,
+  ],
   templateUrl: "./repair-edit.component.html",
   styleUrls: ["./repair-edit.component.css"],
 })
 export class RepairEditComponent implements OnInit {
   repairForm: FormGroup = createRepairForm(this.fb);
-  imagePreviewUrls: string[] = [];
+  receivedImageUrls: string[] = [];
   receivedImages: File[] = [];
+  completedImageUrls: string[] = [];
+  completedImages: File[] = [];
+
+  receivedSection: ImageSection = {
+    title: "Initial Device Images",
+    description: "Images of the device when received",
+    images: this.receivedImageUrls,
+    onSelect: (event) => this.onReceivedImagesSelect(event),
+    onRemove: (index) => this.removeReceivedImage(index),
+  };
+
+  completedSection: ImageSection = {
+    title: "Completed Repair Images",
+    description: "Images of the device after repair completion",
+    images: this.completedImageUrls,
+    onSelect: (event) => this.onCompletedImagesSelect(event),
+    onRemove: (index) => this.removeCompletedImage(index),
+  };
 
   statusOptions = [
     { value: "received", label: "Received" },
@@ -55,7 +80,14 @@ export class RepairEditComponent implements OnInit {
     private repairService: RepairService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.repair$.subscribe((result) => {
+      this.receivedImageUrls = result?.receivedImages || [];
+      this.completedImageUrls = result?.completedImages || [];
+      this.receivedSection.images = this.receivedImageUrls;
+      this.completedSection.images = this.completedImageUrls;
+    });
+  }
 
   ngOnInit() {
     this.repair$.subscribe((repair) => {
@@ -94,18 +126,50 @@ export class RepairEditComponent implements OnInit {
     const result = handleImageUpload(event);
     if (result) {
       this.receivedImages = result.files;
-      this.imagePreviewUrls = result.previewUrls;
+      this.receivedImageUrls = result.previewUrls;
+      this.receivedSection.images = this.receivedImageUrls;
     }
+  }
+
+  onCompletedImagesSelect(event: Event): void {
+    const result = handleImageUpload(event);
+    if (result) {
+      this.completedImages = result.files;
+      this.completedImageUrls = result.previewUrls;
+      this.completedSection.images = this.completedImageUrls;
+    }
+  }
+
+  removeReceivedImage(index: number): void {
+    const result = removeImage(
+      index,
+      this.receivedImages,
+      this.receivedImageUrls
+    );
+    this.receivedImages = result.files;
+    this.receivedImageUrls = result.previewUrls;
+    this.receivedSection.images = this.receivedImageUrls;
+  }
+
+  removeCompletedImage(index: number): void {
+    const result = removeImage(
+      index,
+      this.completedImages,
+      this.completedImageUrls
+    );
+    this.completedImages = result.files;
+    this.completedImageUrls = result.previewUrls;
+    this.completedSection.images = this.completedImageUrls;
   }
 
   removeImage(index: number): void {
     const result = removeImage(
       index,
       this.receivedImages,
-      this.imagePreviewUrls
+      this.receivedImageUrls
     );
     this.receivedImages = result.files;
-    this.imagePreviewUrls = result.previewUrls;
+    this.receivedImageUrls = result.previewUrls;
   }
 
   updateStatus(newStatus: RepairStatusType, repairId: string | undefined) {
@@ -128,14 +192,8 @@ export class RepairEditComponent implements OnInit {
         const repair = {
           ...formData,
           id: this.repairService.getRepair(id)?.id,
-          createdAt: this.repairService.getRepair(id)?.createdAt,
-          updatedAt: new Date(),
-          receivedImages:
-            this.imagePreviewUrls.length > 0
-              ? this.imagePreviewUrls
-              : this.repairService.getRepair(id)?.receivedImages || [],
-          completedImages: this.receivedImages,
-          statusHistory: this.repairService.getRepair(id)?.statusHistory || [],
+          receivedImages: this.receivedImageUrls,
+          completedImages: this.completedImageUrls,
         };
 
         try {

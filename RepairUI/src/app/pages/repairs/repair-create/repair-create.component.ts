@@ -53,10 +53,7 @@ export class RepairCreateComponent {
       const repair = {
         ...formData,
         receivedImages: this.imagePreviewUrls,
-        createdAt: new Date(),
-        updatedAt: new Date(),
         completedImages: [],
-        statusHistory: [],
       };
 
       try {

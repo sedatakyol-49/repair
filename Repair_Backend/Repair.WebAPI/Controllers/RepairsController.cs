@@ -37,11 +37,8 @@ public class RepairsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<RepairDTO>> CreateRepair(RepairDTO repair)
+    public async Task<ActionResult<CreateRepairDto>> CreateRepair(CreateRepairDto repair)
     {
-        repair.CreatedAt = DateTime.UtcNow;
-        repair.UpdatedAt = DateTime.UtcNow;
-
         var newRepair = await _repairRepository.AddAsync(repair);
         await _notificationService.NotifyCustomerAsync(newRepair.Id, "received");
 
@@ -49,14 +46,13 @@ public class RepairsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateRepair(Guid id, RepairDTO repair)
+    public async Task<IActionResult> UpdateRepair(Guid id, UpdateRepairDto repair)
     {
         if (id != repair.Id) return BadRequest();
 
         var existingRepair = await _repairRepository.GetByIdAsync(id);
         if (existingRepair == null) return NotFound();
 
-        repair.UpdatedAt = DateTime.UtcNow;
         await _repairRepository.UpdateAsync(repair);
 
         return NoContent();

@@ -98,7 +98,7 @@ namespace Repair.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Repairs");
+                    b.ToTable("Repairs", (string)null);
                 });
 
             modelBuilder.Entity("Repair.Infrastructure.Models.RepairStatus", b =>
@@ -126,7 +126,7 @@ namespace Repair.Infrastructure.Migrations
 
                     b.HasIndex("RepairId");
 
-                    b.ToTable("RepairStatuses");
+                    b.ToTable("RepairStatuses", (string)null);
                 });
 
             modelBuilder.Entity("Repair.Infrastructure.Models.RepairStatus", b =>

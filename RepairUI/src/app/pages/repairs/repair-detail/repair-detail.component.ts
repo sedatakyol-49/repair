@@ -36,7 +36,11 @@ export class RepairDetailComponent {
   constructor(
     private repairService: RepairService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.repair$.subscribe((res) =>
+      console.log("repair.receivedImages:", res?.receivedImages)
+    );
+  }
 
   getCurrentStatus = getCurrentStatus;
   getStatusText = getStatusText;

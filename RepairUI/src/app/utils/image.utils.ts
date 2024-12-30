@@ -1,5 +1,3 @@
-import { SafeUrl, DomSanitizer } from "@angular/platform-browser";
-
 export interface ImageUploadResult {
   files: File[];
   previewUrls: string[];
@@ -39,14 +37,6 @@ export function removeImage(
   return { files, previewUrls };
 }
 
-// export function isDataUrl(url: string): boolean {
-//   return url.startsWith('data:');
-// }
-
-// export function getImageUrl(url: string): string {
-//   return isDataUrl(url) ? url : url;
-// }
-
 export function isDataUrl(url: string): boolean {
   return url.startsWith("data:image");
 }
@@ -54,4 +44,12 @@ export function isDataUrl(url: string): boolean {
 export function getImageUrl(url: string): string {
   console.log("url:", url);
   return isDataUrl(url) ? url : "";
+}
+
+export interface ImageSection {
+  title: string;
+  description: string;
+  images: string[];
+  onSelect: (event: Event) => void;
+  onRemove: (index: number) => void;
 }

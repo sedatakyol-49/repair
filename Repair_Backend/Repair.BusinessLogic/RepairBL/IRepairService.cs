@@ -1,15 +1,16 @@
 using Repair.Infrastructure.DTOs;
+using Repair.Infrastructure.Models;
 
 namespace Repair.BusinessLogic.RepairBL;
 
 public interface IRepairService
 {
 
-    Task<RepairDTO> GetByIdAsync(Guid id);
-    Task<RepairDTO> AddAsync(RepairDTO entity);
-    Task UpdateAsync(RepairDTO entity);
+    Task<RepairDto> GetByIdAsync(Guid id);
+    Task<RepairModel> AddAsync(CreateRepairDto entity);
+    Task UpdateAsync(UpdateRepairDto entity);
     Task DeleteAsync(Guid id);
-    Task<List<RepairDTO>> GetRepairsWithDetailsAsync();
-    Task<RepairDTO?> GetRepairWithDetailsAsync(Guid id);
+    Task<List<RepairDto>> GetRepairsWithDetailsAsync();
+    Task<RepairDto?> GetRepairWithDetailsAsync(Guid id);
     Task UpdateRepairStatusAsync(Guid repairId, string status, string? notes);
 }
