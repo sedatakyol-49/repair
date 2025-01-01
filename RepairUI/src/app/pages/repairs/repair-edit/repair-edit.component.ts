@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import {
   FormBuilder,
@@ -8,7 +8,7 @@ import {
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RepairService } from "../../../services/repair.service";
-import { map } from "rxjs/operators";
+import { map, takeUntil } from "rxjs/operators";
 import {
   handleImageUpload,
   removeImage,
@@ -21,7 +21,7 @@ import {
   getStatusText,
   getStatusClass,
 } from "../../../utils/repair-status.utils";
-import { firstValueFrom } from "rxjs";
+import { firstValueFrom, Subject } from "rxjs";
 import { RepairStatusType } from "../../../models/repair.model";
 import { ImageSectionComponent } from "../../../components/image-section/image-section.component";
 
@@ -37,7 +37,7 @@ import { ImageSectionComponent } from "../../../components/image-section/image-s
   templateUrl: "./repair-edit.component.html",
   styleUrls: ["./repair-edit.component.css"],
 })
-export class RepairEditComponent implements OnInit {
+export class RepairEditComponent implements OnInit, OnDestroy {
   repairForm: FormGroup = createRepairForm(this.fb);
   receivedImageUrls: string[] = [];
   receivedImages: File[] = [];
@@ -75,22 +75,35 @@ export class RepairEditComponent implements OnInit {
     })
   );
 
+  receivedImages$ = this.repairService.receivedImages$;
+  completedImages$ = this.repairService.completedImages$;
+
+  private destroy$ = new Subject<void>();
+
   constructor(
     private fb: FormBuilder,
     private repairService: RepairService,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.repair$.subscribe((result) => {
-      this.receivedImageUrls = result?.receivedImages || [];
-      this.completedImageUrls = result?.completedImages || [];
+    const id = this.route.snapshot.paramMap.get("id");
+    if (id) {
+      this.repairService.loadReceivedImages(id);
+      this.repairService.loadCompletedImagess(id);
+    }
+    this.receivedImages$.pipe(takeUntil(this.destroy$)).subscribe((result) => {
+      this.receivedImageUrls = result || [];
       this.receivedSection.images = this.receivedImageUrls;
+    });
+
+    this.completedImages$.pipe(takeUntil(this.destroy$)).subscribe((result) => {
+      this.completedImageUrls = result || [];
       this.completedSection.images = this.completedImageUrls;
     });
   }
 
   ngOnInit() {
-    this.repair$.subscribe((repair) => {
+    this.repair$.pipe(takeUntil(this.destroy$)).subscribe((repair) => {
       if (repair) {
         this.repairForm.patchValue({
           description: repair.description,
@@ -110,6 +123,11 @@ export class RepairEditComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // Utility functions

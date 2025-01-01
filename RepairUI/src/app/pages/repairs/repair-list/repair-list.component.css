@@ -1,1 +1,8 @@
-/* Add any component-specific styles here */
+.space-y-4 {
+    position: relative; /* Z-index çalışabilmesi için gerekli */
+    z-index: 10; /* En üstte görünecek */
+    background-color: white; /* Beyaz arka plan */
+    border-radius: 8px; /* Hafif yuvarlatılmış köşeler */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+    padding: 16px; /* İçerik çevresine boşluk */
+}

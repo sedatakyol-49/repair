@@ -10,6 +10,12 @@ export class RepairService {
   private repairs = new BehaviorSubject<Repair[]>([]);
   repairs$ = this.repairs.asObservable();
 
+  private receivedImages = new BehaviorSubject<string[]>([]);
+  receivedImages$ = this.receivedImages.asObservable();
+
+  private completedImages = new BehaviorSubject<string[]>([]);
+  completedImages$ = this.completedImages.asObservable();
+
   constructor(private api: ApiService) {
     this.loadRepairs();
   }
@@ -19,6 +25,22 @@ export class RepairService {
       .get<Repair[]>("repairs")
       .pipe()
       .subscribe((repairs) => this.repairs.next(repairs));
+  }
+
+  public loadReceivedImages(id: string) {
+    this.api
+      .get<string[]>(`repairs/${id}/received-images`)
+      .pipe()
+      .subscribe((receivedImages) => this.receivedImages.next(receivedImages));
+  }
+
+  public loadCompletedImagess(id: string) {
+    this.api
+      .get<string[]>(`repairs/${id}/completed-images`)
+      .pipe()
+      .subscribe((completedImages) =>
+        this.completedImages.next(completedImages)
+      );
   }
 
   createRepair(repair: Partial<Repair>): Observable<Repair> {

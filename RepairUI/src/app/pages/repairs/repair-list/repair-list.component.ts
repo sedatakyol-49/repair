@@ -9,11 +9,18 @@ import {
   getStatusClass,
   getCurrentStatus,
 } from "../../../utils/repair-status.utils";
+import { TranslatePipe } from "../../../pipes/translate.pipe";
 
 @Component({
   selector: "app-repair-list",
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RepairFilterPipe],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    RepairFilterPipe,
+    TranslatePipe,
+  ],
   templateUrl: "./repair-list.component.html",
   styleUrls: ["./repair-list.component.css"],
 })

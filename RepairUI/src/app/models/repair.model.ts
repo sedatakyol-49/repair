@@ -9,8 +9,6 @@ export interface RepairStatus {
 export interface Repair {
   id?: string;
   description: string;
-  receivedImages?: string[];
-  completedImages?: string[];
   createdAt: Date;
   updatedAt: Date;
   estimatedCompletionDate: Date;

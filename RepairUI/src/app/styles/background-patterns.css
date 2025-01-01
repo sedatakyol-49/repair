@@ -1,0 +1,5 @@
+.bg-repair-pattern {
+    background-image: url("../styles/background.webp");
+    background-size: cover;
+    background-position: center;
+}

@@ -1,29 +1,35 @@
-import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import { Component, OnDestroy } from "@angular/core";
+import { AsyncPipe, CommonModule } from "@angular/common";
+import { ActivatedRoute, RouterLink } from "@angular/router";
 import { RepairService } from "../../../services/repair.service";
-import { map } from "rxjs/operators";
+import { map, takeUntil } from "rxjs/operators";
 import {
   getCurrentStatus,
   getStatusText,
   getStatusClass,
 } from "../../../utils/repair-status.utils";
 import { getImageUrl } from "../../../utils/image.utils";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-repair-detail",
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AsyncPipe],
   templateUrl: "./repair-detail.component.html",
   styleUrls: ["./repair-detail.component.css"],
 })
-export class RepairDetailComponent {
+export class RepairDetailComponent implements OnDestroy {
+  private destroy$ = new Subject<void>();
   repair$ = this.repairService.repairs$.pipe(
+    takeUntil(this.destroy$),
     map((repairs) => {
       const id = this.route.snapshot.paramMap.get("id");
       return repairs.find((repair) => repair.id === id);
     })
   );
+
+  receivedImages$ = this.repairService.receivedImages$;
+  completedImages$ = this.repairService.completedImages$;
 
   statusOptions = [
     { value: "received", label: "Received" },
@@ -37,9 +43,16 @@ export class RepairDetailComponent {
     private repairService: RepairService,
     private route: ActivatedRoute
   ) {
-    this.repair$.subscribe((res) =>
-      console.log("repair.receivedImages:", res?.receivedImages)
-    );
+    const id = this.route.snapshot.paramMap.get("id");
+    if (id) {
+      this.repairService.loadReceivedImages(id);
+      this.repairService.loadCompletedImagess(id);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   getCurrentStatus = getCurrentStatus;
@@ -50,10 +63,8 @@ export class RepairDetailComponent {
   updateStatus(event: Event, repairId: string | undefined) {
     if (!repairId) return;
     const select = event.target as HTMLSelectElement;
-    this.repairService.updateRepairStatus(
-      repairId,
-      select.value,
-      "Status updated"
-    );
+    this.repairService
+      .updateRepairStatus(repairId, select.value, "Status updated")
+      .pipe(takeUntil(this.destroy$));
   }
 }

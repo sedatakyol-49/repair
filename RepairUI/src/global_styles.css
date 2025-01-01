@@ -1,3 +1,21 @@
+@import './app/styles/background-patterns.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* Phone repair theme colors */
+:root {
+  --repair-primary: #3b82f6;
+  --repair-secondary: #1e40af;
+  --repair-accent: #60a5fa;
+  --repair-background: #f8fafc;
+  --repair-text: #1e293b;
+}
+
+body {
+  color: var(--repair-text);
+  background-color: var(--repair-background);
+}
