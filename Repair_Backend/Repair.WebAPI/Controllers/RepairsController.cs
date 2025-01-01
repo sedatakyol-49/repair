@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Repair.BusinessLogic.NotificationBL;
 using Repair.BusinessLogic.RepairBL;
-using Repair.Infrastructure.DTOs;
+using Repair.Infrastructure.DTOs.Repair;
 using Repair.Infrastructure.Models;
 
 namespace Repair.API.Controllers;
@@ -69,6 +69,33 @@ public class RepairsController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet("{id}/received-images")]
+    public async Task<IActionResult> GetReceivedImages(Guid id)
+    {
+        var receivedImages = await _repairRepository.GetReceivedImagesAsync(id);
+
+        if (receivedImages == null)
+        {
+            return NotFound("Repair not found or no received images.");
+        }
+
+        return Ok(receivedImages);
+    }
+
+    [HttpGet("{id}/completed-images")]
+    public async Task<IActionResult> GetCompletedImages(Guid id)
+    {
+        var completedImages = await _repairRepository.GetCompletedImagesAsync(id);
+
+        if (completedImages == null)
+        {
+            return NotFound("Repair not found or no completed images.");
+        }
+
+        return Ok(completedImages);
+    }
+
 }
 
 public class UpdateStatusRequest

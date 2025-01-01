@@ -2,19 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Repair.Infrastructure.Models;
 
-public class RepairModel
+public class RepairModel:BaseEntity
 {
-    public Guid Id { get; set; }
-
     [Required]
     [MaxLength(1000)]
     public string Description { get; set; } = string.Empty;
-
-    public List<string> ReceivedImages { get; set; } = new();
-    public List<string>? CompletedImages { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
     public DateTime EstimatedCompletionDate { get; set; }
     public DateTime AppointmentDate { get; set; }
 

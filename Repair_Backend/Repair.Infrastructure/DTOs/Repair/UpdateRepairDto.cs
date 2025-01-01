@@ -1,8 +1,7 @@
-﻿using Repair.Infrastructure.Models;
+﻿namespace Repair.Infrastructure.DTOs.Repair;
 
-namespace Repair.Infrastructure.DTOs;
-
-public class UpdateRepairDto {
+public class UpdateRepairDto
+{
     public Guid Id { get; set; }
     public string Description { get; set; } = string.Empty;
     public List<string>? ReceivedImages { get; set; }

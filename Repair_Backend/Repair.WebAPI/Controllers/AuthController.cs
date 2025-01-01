@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Repair.BusinessLogic.AuthBL;
-using Repair.Infrastructure.Models;
+using Repair.Infrastructure.DTOs;
 
 namespace Repair.API.Controllers;
 
@@ -22,20 +22,6 @@ public class AuthController : ControllerBase
         {
             var exists = await _authService.BusinessExistsAsync();
             return Ok(exists);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(new { message = ex.Message });
-        }
-    }
-
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterRequest request)
-    {
-        try
-        {
-            await _authService.RegisterAsync(request.Email, request.Password, request.BusinessName);
-            return Ok();
         }
         catch (Exception ex)
         {

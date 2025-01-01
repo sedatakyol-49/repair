@@ -1,6 +1,7 @@
 ﻿using Repair.BusinessLogic.AuthBL;
 using Repair.BusinessLogic.NotificationBL;
 using Repair.BusinessLogic.RepairBL;
+using Repair.BusinessLogic.UserBL;
 using Repair.Infrastructure.Mapper;
 
 namespace Repair.API.Core;
@@ -16,6 +17,7 @@ public static class ExtensionMethods
     /// </summary>
     public static IServiceCollection AddRepairBusinessLogic(this IServiceCollection services)
     {
+        services.AddScoped<IUserService, UserService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IRepairService, RepairService>();

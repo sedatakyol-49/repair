@@ -1,10 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Repair.Infrastructure.Models;
-public class RepairStatus
+public class RepairStatus : BaseEntity
 {
-    public Guid Id { get; set; }
-
     [Required]
     [MaxLength(20)]
     public string Status { get; set; } = string.Empty;

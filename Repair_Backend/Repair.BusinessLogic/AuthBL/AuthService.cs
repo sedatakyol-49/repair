@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Repair.Infrastructure;
@@ -8,11 +9,13 @@ public class AuthService : IAuthService
 {
     private readonly RepairDBContext _context;
     private readonly ILogger<AuthService> _logger;
+    private readonly IMapper _mapper;
 
-    public AuthService(RepairDBContext context, ILogger<AuthService> logger)
+    public AuthService(RepairDBContext context, ILogger<AuthService> logger, IMapper mapper)
     {
         _context = context;
         _logger = logger;
+        _mapper = mapper;
     }
 
     public async Task<bool> BusinessExistsAsync()
@@ -34,12 +37,6 @@ public class AuthService : IAuthService
         // For now, return a dummy token
         return "dummy_token";
     }
-
-    public Task RegisterAsync(string email, string password, string businessName)
-    {
-        throw new NotImplementedException();
-    }
-
 
     public async Task<bool> ResetPasswordAsync(string email)
     {

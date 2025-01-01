@@ -1,4 +1,4 @@
-namespace Repair.Infrastructure.Models;
+namespace Repair.Infrastructure.DTOs;
 
 public class LoginResponse
 {
